@@ -38,6 +38,13 @@ body {
 }
 
 /* A elements that don't have a class get default styles */
+a,
+a:visited,
+a:focus,
+a:hover {
+  color: black;
+  text-decoration: none;
+}
 a:not([class]) {
   text-decoration-skip-ink: auto;
 }

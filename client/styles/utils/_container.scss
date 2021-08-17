@@ -1,0 +1,42 @@
+@use '../abstracts/mixins' as *;
+
+.container {
+  flex-grow: 1;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  width: auto;
+  height: 100%;
+  @include breakpoint(small) {
+    max-width: 960px;
+  }
+  @include breakpoint(medium) {
+    max-width: 1152px;
+  }
+  @include breakpoint(large) {
+    max-width: 1244px;
+  }
+  .fluid {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+  }
+}
+
+.flex {
+  position: relative;
+  display: flex;
+  align-items: center;
+  &.space-between {
+    justify-content: space-between;
+  }
+  &.flex-end {
+    justify-content: flex-end;
+  }
+  &.align-top {
+    align-items: top;
+  }
+  &.no-height {
+    height: 0;
+  }
+}
