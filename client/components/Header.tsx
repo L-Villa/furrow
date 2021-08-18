@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   useGlobalStateContext,
   useGlobalDispatchContext,
@@ -39,7 +40,11 @@ export default function Header() {
   }, [currentTheme]);
 
   return (
-    <header>
+    <motion.header
+      animate={{ y: 0, opacity: 1 }}
+      initial={{ y: -72, opacity: 0 }}
+      transition={{ duration: 1, ease: [0.6, 0.05, -0.01, 0.9] }}
+    >
       <div className="container">
         <div className="flex space-between no-height">
           <div className="logo">
@@ -55,6 +60,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }
