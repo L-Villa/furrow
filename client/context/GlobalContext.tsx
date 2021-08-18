@@ -1,17 +1,14 @@
-import React, {
-  createContext,
-  useReducer,
-  useContext,
-  useEffect,
-  useRef,
-} from "react";
+import React, { createContext, useReducer, useContext } from "react";
 
 interface action {
   type: string;
   theme: string;
+  cursorType: boolean;
 }
 interface state {
   currentTheme: string;
+  cursorType: boolean;
+  cursorStyles: string[];
 }
 type iDispatch = React.Dispatch<any>;
 const GlobalStateContext = createContext({});
@@ -29,6 +26,12 @@ const globalReducer = (state: state, action: action) => {
         currentTheme: action.theme,
       };
     }
+    case "CURSOR_TYPE": {
+      return {
+        ...state,
+        cursorType: action.cursorType,
+      };
+    }
     default: {
       throw new Error(`unhandled action type: ${action.type}`);
     }
@@ -36,19 +39,10 @@ const globalReducer = (state: state, action: action) => {
 };
 
 export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
-  // const boom = useRef<string>();
-  // useEffect(() => {
-  //   boom.current = (
-  //     localStorage.theme === null || undefined ? "dark" : localStorage.theme
-  //   )!;
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(window);
-  // }, []);
-
   const [state, dispatch] = useReducer(globalReducer, {
     currentTheme: "dark",
+    cursorType: false,
+    cursorStyles: ["pointer", "hovered"],
   });
 
   return (

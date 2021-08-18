@@ -6,7 +6,11 @@ import {
   useGlobalDispatchContext,
 } from "../context/GlobalContext";
 
-export default function Header() {
+interface FuncProps {
+  onCursor(arg?: string): void;
+}
+
+const Header: React.FC<FuncProps> = ({ onCursor }) => {
   const dispatch = useGlobalDispatchContext();
   const { currentTheme }: any = useGlobalStateContext();
 
@@ -18,12 +22,12 @@ export default function Header() {
   };
 
   // Get initial theme from local storage
-  const boom = useRef<string>();
+  const initialTheme = useRef<string>();
   useEffect(() => {
-    boom.current = (
+    initialTheme.current = (
       localStorage.theme === null || undefined ? "dark" : localStorage.theme
     )!;
-    dispatch({ type: "TOGGLE_THEME", theme: boom.current });
+    dispatch({ type: "TOGGLE_THEME", theme: initialTheme.current });
   }, []);
 
   // Set theme on toggle
@@ -47,9 +51,17 @@ export default function Header() {
     >
       <div className="container">
         <div className="flex space-between no-height">
-          <div className="logo">
+          <div
+            className="logo"
+            onMouseEnter={() => onCursor("hovered")}
+            onMouseLeave={() => onCursor()}
+          >
             <Link href="/">FURR</Link>
-            <span onClick={toggleTheme}></span>
+            <span
+              onClick={toggleTheme}
+              onMouseEnter={() => onCursor("pointer")}
+              onMouseLeave={() => onCursor()}
+            ></span>
             <Link href="/">W</Link>
           </div>
           <div className="menu">
@@ -62,4 +74,6 @@ export default function Header() {
       </div>
     </motion.header>
   );
-}
+};
+
+export default Header;
