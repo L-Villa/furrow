@@ -1,9 +1,17 @@
 import React, { createContext, useReducer, useContext } from "react";
 
-const GlobalStateContext = createContext();
-const GlobalDispatchContext = createContext();
+const GlobalStateContext = createContext({});
+const GlobalDispatchContext = createContext({});
 
-const globalReducer = (state, action) => {
+interface action {
+  type: string;
+  theme: string;
+}
+interface state {
+  currentTheme: string;
+}
+
+const globalReducer = (state: state, action: action) => {
   switch (action.type) {
     case "TOGGLE_THEME": {
       return {
@@ -17,11 +25,7 @@ const globalReducer = (state, action) => {
   }
 };
 
-interface ProviderProps {
-  children?: React.ReactNode;
-}
-
-export const GlobalProvider: React.FC<ProviderProps> = ({ children }) => {
+export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(globalReducer, {
     currentTheme: "dark",
   });
