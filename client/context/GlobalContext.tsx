@@ -1,8 +1,5 @@
 import React, { createContext, useReducer, useContext } from "react";
 
-const GlobalStateContext = createContext({});
-const GlobalDispatchContext = createContext({});
-
 interface action {
   type: string;
   theme: string;
@@ -10,6 +7,13 @@ interface action {
 interface state {
   currentTheme: string;
 }
+type iDispatch = React.Dispatch<any>;
+const GlobalStateContext = createContext({});
+const GlobalDispatchContext = createContext<iDispatch>({
+  // @ts-ignore
+  type: "TOGGLE_THEME",
+  theme: "dark",
+});
 
 const globalReducer = (state: state, action: action) => {
   switch (action.type) {
