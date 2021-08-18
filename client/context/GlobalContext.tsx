@@ -1,4 +1,10 @@
-import React, { createContext, useReducer, useContext } from "react";
+import React, {
+  createContext,
+  useReducer,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 
 interface action {
   type: string;
@@ -30,6 +36,17 @@ const globalReducer = (state: state, action: action) => {
 };
 
 export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
+  // const boom = useRef<string>();
+  // useEffect(() => {
+  //   boom.current = (
+  //     localStorage.theme === null || undefined ? "dark" : localStorage.theme
+  //   )!;
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log(window);
+  // }, []);
+
   const [state, dispatch] = useReducer(globalReducer, {
     currentTheme: "dark",
   });
