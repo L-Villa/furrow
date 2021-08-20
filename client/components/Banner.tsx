@@ -66,6 +66,26 @@ const Banner: React.FC = () => {
     }, 150);
   }, []);
 
+  const bannerTitle = {
+    initial: { y: 800 },
+    animate: {
+      y: 0,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+  const headline = {
+    initial: { y: 800 },
+    animate: {
+      y: 0,
+      transition: {
+        duration: 1,
+        ease: [0.6, 0.05, -0.01, 0.9],
+      },
+    },
+  };
+
   return (
     <section
       className="banner"
@@ -84,10 +104,29 @@ const Banner: React.FC = () => {
         ></video>
       </div>
       <canvas key={currentTheme} ref={canvas} width={width} height={height} />
-      <h1 className="banner-title">
-        <span className="headline">DIG</span>
-        <span className="headline">DEEP</span>
-      </h1>
+      <motion.h1
+        className="banner-title"
+        variants={bannerTitle}
+        initial="initial"
+        animate="animate"
+      >
+        <motion.span
+          className="headline"
+          variants={headline}
+          initial="initial"
+          animate="animate"
+        >
+          DIG
+        </motion.span>
+        <motion.span
+          className="headline"
+          variants={headline}
+          initial="initial"
+          animate="animate"
+        >
+          DEEP
+        </motion.span>
+      </motion.h1>
     </section>
   );
 };
