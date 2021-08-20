@@ -4,6 +4,15 @@
   width: 100%;
   position: relative;
   margin-bottom: 296px;
+  .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    background: black;
+  }
   .video {
     height: 100%;
     width: 100%;
@@ -16,6 +25,7 @@
     top: 0;
     left: 0;
     height: 100%;
+    width: 100%;
     display: block;
   }
   .banner-title {
