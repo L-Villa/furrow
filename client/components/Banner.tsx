@@ -1,9 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import useWindowDimensions from "../hooks/useWindowDimensions";
-import { useGlobalStateContext } from "../context/GlobalContext";
+import {
+  useGlobalStateContext,
+  useUpdateCursor,
+} from "../context/GlobalContext";
 
 const Banner: React.FC = () => {
+  const onCursor = useUpdateCursor();
   let canvas = useRef<HTMLCanvasElement>(null);
   const { width, height }: any = useWindowDimensions();
   const { currentTheme }: any = useGlobalStateContext();
@@ -63,7 +67,11 @@ const Banner: React.FC = () => {
   }, []);
 
   return (
-    <section className="banner">
+    <section
+      className="banner"
+      onMouseEnter={() => onCursor("hovered")}
+      onMouseLeave={() => onCursor()}
+    >
       {loading && <div className="cover"></div>}
       <div className="video">
         <video

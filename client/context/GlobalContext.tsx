@@ -56,3 +56,13 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const useGlobalStateContext = () => useContext(GlobalStateContext);
 export const useGlobalDispatchContext = () => useContext(GlobalDispatchContext);
+
+export const useUpdateCursor = () => {
+  const { cursorStyles }: any = useGlobalStateContext();
+  const dispatch = useGlobalDispatchContext();
+  const onCursor = (cursorType?: string) => {
+    cursorType = (cursorStyles.includes(cursorType) && cursorType) || false;
+    dispatch({ type: "CURSOR_TYPE", cursorType: cursorType });
+  };
+  return onCursor;
+};

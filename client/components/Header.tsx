@@ -4,15 +4,13 @@ import { motion } from "framer-motion";
 import {
   useGlobalStateContext,
   useGlobalDispatchContext,
+  useUpdateCursor,
 } from "../context/GlobalContext";
 
-interface FuncProps {
-  onCursor(arg?: string): void;
-}
-
-const Header: React.FC<FuncProps> = ({ onCursor }) => {
+const Header: React.FC = () => {
   const dispatch = useGlobalDispatchContext();
   const { currentTheme }: any = useGlobalStateContext();
+  const onCursor = useUpdateCursor();
 
   // Handle theme toggle on click
   const toggleTheme = () => {
@@ -51,16 +49,12 @@ const Header: React.FC<FuncProps> = ({ onCursor }) => {
     >
       <div className="container">
         <div className="flex space-between no-height">
-          <div
-            className="logo"
-            onMouseEnter={() => onCursor("hovered")}
-            onMouseLeave={() => onCursor()}
-          >
+          <div className="logo" onMouseEnter={() => onCursor("hovered")}>
             <Link href="/">FURR</Link>
             <span
               onClick={toggleTheme}
               onMouseEnter={() => onCursor("pointer")}
-              onMouseLeave={() => onCursor()}
+              onMouseLeave={() => onCursor("hovered")}
             ></span>
             <Link href="/">W</Link>
           </div>
