@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { route } from "next/dist/server/router";
 import { useGlobalStateContext, useToggleMenu } from "../context/GlobalContext";
 
 const routes = [
@@ -49,7 +48,12 @@ const Navigation: React.FC = () => {
     <>
       <AnimatePresence>
         {menuOpen && (
-          <nav>
+          <motion.nav
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
+          >
             <div className="container">
               <div className="nav-header">
                 <div className="flex space-between no-height">
@@ -139,7 +143,7 @@ const Navigation: React.FC = () => {
                 </div>
               </div>
             </div>
-          </nav>
+          </motion.nav>
         )}
       </AnimatePresence>
     </>
