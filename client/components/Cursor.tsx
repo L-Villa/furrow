@@ -4,7 +4,7 @@ import { useGlobalStateContext } from "../context/GlobalContext";
 const Cursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 400, y: 400 });
 
-  const onMouseMove = (e: any) => {
+  const onMouseMove = (e: MouseEvent) => {
     const { pageX: x, pageY: y } = e;
     setMousePosition({ x, y });
   };
