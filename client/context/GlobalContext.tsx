@@ -50,7 +50,7 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(globalReducer, {
     currentTheme: "dark",
     cursorType: false,
-    cursorStyles: ["pointer", "hovered"],
+    cursorStyles: ["pointer", "hovered", "nav-open"],
     menuOpen: false,
   });
 

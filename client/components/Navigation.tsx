@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { useGlobalStateContext, useToggleMenu } from "../context/GlobalContext";
+import {
+  useGlobalStateContext,
+  useToggleMenu,
+  useUpdateCursor,
+} from "../context/GlobalContext";
 
 const routes = [
   {
@@ -38,6 +42,7 @@ const routes = [
 
 const Navigation: React.FC = () => {
   const { menuOpen }: any = useGlobalStateContext();
+  const onCursor = useUpdateCursor();
   const toggleMenu = useToggleMenu();
   const [revealVideo, setRevealVideo] = useState({
     show: false,
@@ -53,13 +58,19 @@ const Navigation: React.FC = () => {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
+            onHoverStart={() => onCursor("nav-open")}
+            onHoverEnd={() => onCursor()}
           >
             <div className="container">
               <div className="nav-header">
                 <div className="flex space-between no-height">
                   <h2>Projects</h2>
                   <div className="close-nav">
-                    <button onClick={() => toggleMenu()}>
+                    <button
+                      onClick={() => toggleMenu()}
+                      onMouseEnter={() => onCursor("pointer")}
+                      onMouseLeave={() => onCursor("nav-open")}
+                    >
                       <span></span>
                       <span></span>
                     </button>
@@ -85,6 +96,8 @@ const Navigation: React.FC = () => {
                           key: id,
                         })
                       }
+                      onMouseEnter={() => onCursor("pointer")}
+                      onMouseLeave={() => onCursor("nav-open")}
                     >
                       <Link href={`/projects${path}`}>
                         <motion.div
