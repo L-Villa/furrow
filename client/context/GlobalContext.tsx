@@ -4,11 +4,13 @@ interface action {
   type: string;
   theme: string;
   cursorType: boolean;
+  menuOpen: boolean;
 }
 interface state {
   currentTheme: string;
   cursorType: boolean;
   cursorStyles: string[];
+  menuOpen: boolean;
 }
 type iDispatch = React.Dispatch<any>;
 const GlobalStateContext = createContext({});
@@ -32,6 +34,12 @@ const globalReducer = (state: state, action: action) => {
         cursorType: action.cursorType,
       };
     }
+    case "TOGGLE_NAVIGATION": {
+      return {
+        ...state,
+        menuOpen: action.menuOpen,
+      };
+    }
     default: {
       throw new Error(`unhandled action type: ${action.type}`);
     }
@@ -43,6 +51,7 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     currentTheme: "dark",
     cursorType: false,
     cursorStyles: ["pointer", "hovered"],
+    menuOpen: false,
   });
 
   return (
@@ -57,12 +66,23 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
 export const useGlobalStateContext = () => useContext(GlobalStateContext);
 export const useGlobalDispatchContext = () => useContext(GlobalDispatchContext);
 
+// Used to update cursor style
 export const useUpdateCursor = () => {
   const { cursorStyles }: any = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
-  const onCursor = (cursorType?: string) => {
+  const onCursor = (cursorType?: string): void => {
     cursorType = (cursorStyles.includes(cursorType) && cursorType) || false;
     dispatch({ type: "CURSOR_TYPE", cursorType: cursorType });
   };
   return onCursor;
+};
+
+// Used to show or hide the navigation component
+export const useToggleMenu = () => {
+  const { menuOpen }: any = useGlobalStateContext();
+  const dispatch = useGlobalDispatchContext();
+  const toggleMenu = (): void => {
+    dispatch({ type: "TOGGLE_NAVIGATION", menuOpen: !menuOpen });
+  };
+  return toggleMenu;
 };

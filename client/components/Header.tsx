@@ -5,12 +5,14 @@ import {
   useGlobalStateContext,
   useGlobalDispatchContext,
   useUpdateCursor,
+  useToggleMenu,
 } from "../context/GlobalContext";
 
 const Header: React.FC = () => {
   const dispatch = useGlobalDispatchContext();
   const { currentTheme }: any = useGlobalStateContext();
   const onCursor = useUpdateCursor();
+  const toggleMenu = useToggleMenu();
 
   // Handle theme toggle on click
   const toggleTheme = () => {
@@ -59,7 +61,7 @@ const Header: React.FC = () => {
             <Link href="/">W</Link>
           </div>
           <div className="menu">
-            <div className="button">
+            <div className="button" onClick={() => toggleMenu()}>
               <span></span>
               <span></span>
             </div>
