@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useGlobalStateContext } from "../context/GlobalContext";
 
-const Cursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 400, y: 400 });
+interface iState {
+  x: number;
+  y: number;
+}
 
-  const onMouseMove = (e: MouseEvent) => {
+const Cursor: React.FC = () => {
+  const [mousePosition, setMousePosition] = useState<iState>({
+    x: 400,
+    y: 400,
+  });
+
+  const onMouseMove = (e: MouseEvent): void => {
     const { pageX: x, pageY: y } = e;
     setMousePosition({ x, y });
   };
