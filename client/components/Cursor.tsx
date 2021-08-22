@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useGlobalStateContext } from "../context/GlobalContext";
+import { motion } from "framer-motion";
 
 interface iState {
   x: number;
@@ -13,7 +14,7 @@ const Cursor: React.FC = () => {
   });
 
   const onMouseMove = (e: MouseEvent): void => {
-    const { pageX: x, pageY: y } = e;
+    const { clientX: x, clientY: y } = e;
     setMousePosition({ x, y });
   };
 
@@ -25,12 +26,17 @@ const Cursor: React.FC = () => {
   }, []);
 
   const { cursorType }: any = useGlobalStateContext();
+  const cursorWidth = useRef<any>(null);
 
   return (
-    <div
+    <motion.div
+      ref={cursorWidth}
       className={`cursor ${!!cursorType && "hovered"} ${cursorType}`}
-      style={{ left: `${mousePosition.x}px`, top: `${mousePosition.y}px` }}
-    ></div>
+      style={{
+        x: mousePosition.x - cursorWidth.current?.offsetWidth / 2,
+        y: mousePosition.y - cursorWidth.current?.offsetWidth / 2,
+      }}
+    ></motion.div>
   );
 };
 
