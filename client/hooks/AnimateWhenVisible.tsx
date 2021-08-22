@@ -4,10 +4,11 @@ import { AnimatePresence, motion, useAnimation } from "framer-motion";
 
 interface iProps {
   children?: React.ReactNode;
-  variants: {
+  variants?: {
     initial: {
       opacity?: number;
       x?: number;
+      y?: number;
       transition?: {
         duration?: number;
         ease?: string | number[];
@@ -16,6 +17,7 @@ interface iProps {
     animate: {
       opacity?: number;
       x?: number;
+      y?: number;
       transition?: {
         duration?: number;
         ease?: string | number[];
@@ -26,8 +28,9 @@ interface iProps {
     duration?: number;
     ease?: string | number[];
   };
-  options: {
+  options?: {
     triggerOnce?: boolean;
+    rootMargin?: string;
   };
 }
 const AnimateWhenVisible: React.FC<iProps> = ({
