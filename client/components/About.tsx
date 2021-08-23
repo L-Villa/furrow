@@ -1,10 +1,10 @@
 import React from "react";
 
-const about = () => {
+const About = () => {
   return (
     <section className="home-about-section">
       <div className="container">
-        <div className="flex">
+        <div className="flex align-top">
           <div className="about">
             <h2>
               Furrow is an integrated, full-service creative studio offering
@@ -29,15 +29,13 @@ const about = () => {
   );
 };
 
-export default about;
-
 const Acordian: React.FC = () => {
   return (
     <>
       <div className="accordian-header">
         <div className="accordian-icon">
-          <div className="span"></div>
-          <div className="span"></div>
+          <span></span>
+          <span></span>
         </div>
         Hello Youtube
       </div>
@@ -49,3 +47,5 @@ const Acordian: React.FC = () => {
     </>
   );
 };
+
+export default About;
