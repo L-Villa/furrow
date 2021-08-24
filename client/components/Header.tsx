@@ -6,13 +6,23 @@ import {
   useGlobalDispatchContext,
   useUpdateCursor,
   useToggleMenu,
+  useLockCursor,
 } from "../context/GlobalContext";
+import useElementPosition from "../hooks/useElementPosition";
 
 const Header: React.FC = () => {
   const dispatch = useGlobalDispatchContext();
   const { currentTheme }: any = useGlobalStateContext();
   const onCursor = useUpdateCursor();
   const toggleMenu = useToggleMenu();
+  const hamburger = useRef<HTMLDivElement>(null);
+
+  const boom = useElementPosition(hamburger, 1000);
+  const lockCursor = useLockCursor();
+  const onMenuHover = () => {
+    onCursor("locked");
+    lockCursor(boom);
+  };
 
   // Handle theme toggle on click
   const toggleTheme = () => {
@@ -61,7 +71,12 @@ const Header: React.FC = () => {
             <Link href="/">W</Link>
           </div>
           <div className="menu">
-            <div className="button" onClick={() => toggleMenu()}>
+            <div
+              className="button"
+              ref={hamburger}
+              onClick={() => toggleMenu()}
+              onMouseEnter={() => onMenuHover()}
+            >
               <span></span>
               <span></span>
             </div>

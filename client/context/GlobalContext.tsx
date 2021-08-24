@@ -1,16 +1,19 @@
 import React, { createContext, useReducer, useContext } from "react";
+import useElementPosition from "../hooks/useElementPosition";
 
 interface action {
   type: string;
   theme: string;
   cursorType: boolean;
   menuOpen: boolean;
+  cursorPosition: { x: number; y: number };
 }
 interface state {
   currentTheme: string;
   cursorType: boolean;
   cursorStyles: string[];
   menuOpen: boolean;
+  cursorPosition: { x: number; y: number };
 }
 type iDispatch = React.Dispatch<any>;
 const GlobalStateContext = createContext({});
@@ -40,6 +43,12 @@ const globalReducer = (state: state, action: action) => {
         menuOpen: action.menuOpen,
       };
     }
+    case "SET_CURSOR_POSITION": {
+      return {
+        ...state,
+        cursorPosition: action.cursorPosition,
+      };
+    }
     default: {
       throw new Error(`unhandled action type: ${action.type}`);
     }
@@ -50,8 +59,9 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(globalReducer, {
     currentTheme: "dark",
     cursorType: false,
-    cursorStyles: ["pointer", "hovered", "nav-open"],
+    cursorStyles: ["pointer", "hovered", "nav-open", "locked"],
     menuOpen: false,
+    cursorPosition: { x: 0, y: 0 },
   });
 
   return (
@@ -85,4 +95,13 @@ export const useToggleMenu = () => {
     dispatch({ type: "TOGGLE_NAVIGATION", menuOpen: !menuOpen });
   };
   return toggleMenu;
+};
+
+// Used to lock cursor position
+export const useLockCursor = () => {
+  const dispatch = useGlobalDispatchContext();
+  const lockCursor = ({ x, y }: { x: number; y: number }): void => {
+    dispatch({ type: "SET_CURSOR_POSITION", cursorPosition: { x, y } });
+  };
+  return lockCursor;
 };

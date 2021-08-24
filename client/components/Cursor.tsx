@@ -25,7 +25,7 @@ const Cursor: React.FC = () => {
     };
   }, []);
 
-  const { cursorType }: any = useGlobalStateContext();
+  const { cursorType, cursorPosition }: any = useGlobalStateContext();
   const cursorWidth = useRef<any>(null);
 
   return (
@@ -33,8 +33,14 @@ const Cursor: React.FC = () => {
       ref={cursorWidth}
       className={`cursor ${!!cursorType && "hovered"} ${cursorType}`}
       style={{
-        x: mousePosition.x - cursorWidth.current?.offsetWidth / 2,
-        y: mousePosition.y - cursorWidth.current?.offsetWidth / 2,
+        x:
+          cursorType === "locked"
+            ? cursorPosition.x - cursorWidth.current?.offsetWidth / 2
+            : mousePosition.x - cursorWidth.current?.offsetWidth / 2,
+        y:
+          cursorType === "locked"
+            ? cursorPosition.y - cursorWidth.current?.offsetWidth / 2
+            : mousePosition.y - cursorWidth.current?.offsetWidth / 2,
       }}
     ></motion.div>
   );
