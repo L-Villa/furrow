@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useUpdateCursor } from "../context/GlobalContext";
+import { useUpdateCursor, useToggleMenu } from "../context/GlobalContext";
 import AnimateWhenVisible from "../hooks/AnimateWhenVisible";
 
 const Featured = () => {
   const onCursor = useUpdateCursor();
+  const toggleMenu = useToggleMenu();
   const [hovered, setHovered] = useState(false);
   return (
     <AnimateWhenVisible
@@ -88,7 +89,11 @@ const Featured = () => {
         <div className="container">
           <div className="featured-projects">
             <div className="flex flex-end">
-              <button>
+              <button
+                onClick={() => toggleMenu()}
+                onMouseEnter={() => onCursor("pointer")}
+                onMouseLeave={() => onCursor()}
+              >
                 <span>All Projects</span>
               </button>
             </div>
