@@ -12,6 +12,7 @@ const useElementPosition = (el: RefObject<HTMLElement>, delay: number = 0) => {
 
   useEffect(() => {
     const handlePosition = () => {
+      if (el.current === null) return;
       let element = el.current;
       let x =
         element!.getBoundingClientRect().left +

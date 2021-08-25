@@ -15,14 +15,11 @@ const Header: React.FC = () => {
   const { currentTheme }: any = useGlobalStateContext();
   const onCursor = useUpdateCursor();
   const toggleMenu = useToggleMenu();
-  const hamburger = useRef<HTMLDivElement>(null);
-
-  const boom = useElementPosition(hamburger, 1000);
   const lockCursor = useLockCursor();
-  const onMenuHover = () => {
-    onCursor("locked");
-    lockCursor(boom);
-  };
+  const hamburger = useRef<HTMLDivElement>(null);
+  const hamburgerPos = useElementPosition(hamburger, 1000);
+  const themeToggle = useRef<HTMLDivElement>(null);
+  const logoPos = useElementPosition(themeToggle, 1000);
 
   // Handle theme toggle on click
   const toggleTheme = () => {
@@ -64,9 +61,14 @@ const Header: React.FC = () => {
           <div className="logo" onMouseEnter={() => onCursor("hovered")}>
             <Link href="/">FURR</Link>
             <span
+              ref={themeToggle}
               onClick={toggleTheme}
-              onMouseEnter={() => onCursor("pointer")}
-              onMouseLeave={() => onCursor("hovered")}
+              onMouseEnter={() => {
+                lockCursor(logoPos, { enter: "pointer" });
+              }}
+              onMouseLeave={() => {
+                lockCursor(logoPos, { exit: "hovered" });
+              }}
             ></span>
             <Link href="/">W</Link>
           </div>
@@ -75,7 +77,10 @@ const Header: React.FC = () => {
               className="button"
               ref={hamburger}
               onClick={() => toggleMenu()}
-              onMouseEnter={() => onMenuHover()}
+              onMouseEnter={() =>
+                lockCursor(hamburgerPos, { enter: "hovered" })
+              }
+              onMouseLeave={() => lockCursor(hamburgerPos)}
             >
               <span></span>
               <span></span>

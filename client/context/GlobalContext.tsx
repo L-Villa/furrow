@@ -6,6 +6,7 @@ interface action {
   theme: string;
   cursorType: boolean;
   menuOpen: boolean;
+  cursorLocked: boolean;
   cursorPosition: { x: number; y: number };
 }
 interface state {
@@ -13,6 +14,7 @@ interface state {
   cursorType: boolean;
   cursorStyles: string[];
   menuOpen: boolean;
+  cursorLocked: boolean;
   cursorPosition: { x: number; y: number };
 }
 type iDispatch = React.Dispatch<any>;
@@ -43,6 +45,12 @@ const globalReducer = (state: state, action: action) => {
         menuOpen: action.menuOpen,
       };
     }
+    case "SET_CURSOR_LOCKED": {
+      return {
+        ...state,
+        cursorLocked: action.cursorLocked,
+      };
+    }
     case "SET_CURSOR_POSITION": {
       return {
         ...state,
@@ -59,8 +67,9 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(globalReducer, {
     currentTheme: "dark",
     cursorType: false,
-    cursorStyles: ["pointer", "hovered", "nav-open", "locked"],
+    cursorStyles: ["pointer", "hovered", "nav-open"],
     menuOpen: false,
+    cursorLocked: false,
     cursorPosition: { x: 0, y: 0 },
   });
 
@@ -97,11 +106,29 @@ export const useToggleMenu = () => {
   return toggleMenu;
 };
 
+// Interface for useLockCursor
+interface iProps {
+  pos: { x: number; y: number };
+  styles?: {
+    enter?: string | undefined;
+    exit?: string | undefined;
+  };
+}
+
 // Used to lock cursor position
 export const useLockCursor = () => {
   const dispatch = useGlobalDispatchContext();
-  const lockCursor = ({ x, y }: { x: number; y: number }): void => {
-    dispatch({ type: "SET_CURSOR_POSITION", cursorPosition: { x, y } });
+  const { cursorLocked }: any = useGlobalStateContext();
+  const onCursor = useUpdateCursor();
+  const lockCursor = (pos: iProps["pos"], styles?: iProps["styles"]): void => {
+    if (!cursorLocked) {
+      dispatch({ type: "SET_CURSOR_LOCKED", cursorLocked: true });
+      dispatch({ type: "SET_CURSOR_POSITION", cursorPosition: pos });
+      onCursor(styles?.enter);
+    } else {
+      dispatch({ type: "SET_CURSOR_LOCKED", cursorLocked: false });
+      onCursor(styles?.exit);
+    }
   };
   return lockCursor;
 };
