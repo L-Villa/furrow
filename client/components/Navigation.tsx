@@ -6,6 +6,7 @@ import {
   useToggleMenu,
   useUpdateCursor,
 } from "../context/GlobalContext";
+import { Facebook, Instagram, Vimeo } from "../public/svg/social-icons";
 
 const routes = [
   {
@@ -130,7 +131,46 @@ const Navigation: React.FC = () => {
                   ))}
                 </ul>
               </div>
-              <div className="nav-footer"></div>
+              <footer className="nav-footer">
+                <div className="container">
+                  <div className="flex space-between">
+                    <div className="footer-content">
+                      <p>123.555.4321</p>
+                      <p>info@contact.com</p>
+                    </div>
+                    <div className="footer-content wider">
+                      <p>15 Main St</p>
+                      <p>City, State 99999</p>
+                    </div>
+                    <div className="footer-social">
+                      <a
+                        href="/"
+                        target="_blank"
+                        onMouseEnter={() => onCursor("pointer")}
+                        onMouseLeave={() => onCursor("nav-open")}
+                      >
+                        <Instagram />
+                      </a>
+                      <a
+                        href="/"
+                        target="_blank"
+                        onMouseEnter={() => onCursor("pointer")}
+                        onMouseLeave={() => onCursor("nav-open")}
+                      >
+                        <Facebook />
+                      </a>
+                      <a
+                        href="/"
+                        target="_blank"
+                        onMouseEnter={() => onCursor("pointer")}
+                        onMouseLeave={() => onCursor("nav-open")}
+                      >
+                        <Vimeo />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </footer>
               <div className="nav-videos">
                 <motion.div
                   animate={{ width: revealVideo.show ? 0 : "100%" }}

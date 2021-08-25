@@ -7,11 +7,11 @@ import { Instagram, Facebook, Vimeo } from "../public/svg/social-icons";
 const Footer = () => {
   const lockCursor = useLockCursor();
   const instagramRef = useRef(null);
-  const instagramPosition = useElementPosition(instagramRef, 800);
+  const instagramPosition = useElementPosition(instagramRef);
   const facebookRef = useRef(null);
-  const facebookPosition = useElementPosition(facebookRef, 800);
+  const facebookPosition = useElementPosition(facebookRef);
   const vimeoRef = useRef(null);
-  const vimeoPosition = useElementPosition(vimeoRef, 800);
+  const vimeoPosition = useElementPosition(vimeoRef);
 
   return (
     <AnimateWhenVisible
