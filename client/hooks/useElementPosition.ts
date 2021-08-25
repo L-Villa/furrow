@@ -16,11 +16,11 @@ const useElementPosition = (el: RefObject<HTMLElement>, delay: number = 0) => {
       let element = el.current;
       let x =
         element!.getBoundingClientRect().left +
-        document.documentElement.scrollLeft +
+        // document.documentElement.scrollLeft +
         element!.offsetWidth / 2;
       let y =
         element!.getBoundingClientRect().top +
-        document.documentElement.scrollTop +
+        // document.documentElement.scrollTop +
         element!.offsetHeight / 2;
       setElementPosition(getElement(x, y));
     };

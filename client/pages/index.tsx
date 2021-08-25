@@ -4,6 +4,7 @@ import About from "../components/About";
 import Banner from "../components/Banner";
 import Content from "../components/Content";
 import Featured from "../components/Featured";
+import Footer from "../components/Footer";
 import styles from "../styles/Home.module.scss";
 
 const Home: NextPage = () => {
@@ -18,6 +19,7 @@ const Home: NextPage = () => {
       <Content />
       <Featured />
       <About />
+      <Footer />
     </div>
   );
 };
