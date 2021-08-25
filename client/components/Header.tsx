@@ -12,7 +12,7 @@ import useElementPosition from "../hooks/useElementPosition";
 
 const Header: React.FC = () => {
   const dispatch = useGlobalDispatchContext();
-  const { currentTheme }: any = useGlobalStateContext();
+  const { currentTheme, menuOpen }: any = useGlobalStateContext();
   const onCursor = useUpdateCursor();
   const toggleMenu = useToggleMenu();
   const lockCursor = useLockCursor();
@@ -80,7 +80,11 @@ const Header: React.FC = () => {
               onMouseEnter={() =>
                 lockCursor(hamburgerPos, { enter: "hovered" })
               }
-              onMouseLeave={() => lockCursor(hamburgerPos)}
+              onMouseLeave={() =>
+                lockCursor(hamburgerPos, {
+                  exit: menuOpen ? "nav-open" : "hovered",
+                })
+              }
             >
               <span></span>
               <span></span>

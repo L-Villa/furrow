@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useUpdateCursor, useToggleMenu } from "../context/GlobalContext";
+import {
+  useUpdateCursor,
+  useToggleMenu,
+  useGlobalStateContext,
+} from "../context/GlobalContext";
 import AnimateWhenVisible from "../hooks/AnimateWhenVisible";
 
 const Featured = () => {
   const onCursor = useUpdateCursor();
   const toggleMenu = useToggleMenu();
   const [hovered, setHovered] = useState(false);
+  const { menuOpen }: any = useGlobalStateContext();
   return (
     <AnimateWhenVisible
       variants={{
@@ -92,7 +97,7 @@ const Featured = () => {
               <button
                 onClick={() => toggleMenu()}
                 onMouseEnter={() => onCursor("pointer")}
-                onMouseLeave={() => onCursor()}
+                onMouseLeave={() => onCursor(menuOpen ? "nav-open" : "")}
               >
                 <span>All Projects</span>
               </button>
