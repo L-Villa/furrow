@@ -171,29 +171,29 @@ const Navigation: React.FC = () => {
                   </div>
                 </div>
               </footer>
-              <div className="nav-videos">
-                <motion.div
-                  animate={{ width: revealVideo.show ? 0 : "100%" }}
-                  className="reveal"
-                ></motion.div>
-                <div className="video">
-                  <AnimatePresence>
-                    <motion.video
-                      key={revealVideo.key}
-                      src={`/video/${revealVideo.video}`}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 1 }}
-                      transition={{
-                        duration: 0.2,
-                        ease: "easeInOut",
-                      }}
-                      loop
-                      autoPlay
-                      muted
-                    ></motion.video>
-                  </AnimatePresence>
-                </div>
+            </div>
+            <div className="nav-videos">
+              <motion.div
+                animate={{ width: revealVideo.show ? 0 : "100%" }}
+                className="reveal"
+              ></motion.div>
+              <div className="video">
+                <AnimatePresence exitBeforeEnter>
+                  <motion.video
+                    key={revealVideo.key}
+                    src={`/video/${revealVideo.video}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 1 }}
+                    transition={{
+                      duration: 0.2,
+                      ease: "easeInOut",
+                    }}
+                    loop
+                    autoPlay
+                    muted
+                  ></motion.video>
+                </AnimatePresence>
               </div>
             </div>
           </motion.nav>
