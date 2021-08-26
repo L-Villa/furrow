@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  useGlobalStateContext,
-  useToggleMenu,
-  useUpdateCursor,
-} from "../context/GlobalContext";
+import { useGlobalStateContext } from "../context/GlobalContext";
+import { useToggleMenu, useUpdateCursor } from "../hooks/useContextSetters";
 import { Facebook, Instagram, Vimeo } from "../public/svg/social-icons";
 
 interface IRoutes {

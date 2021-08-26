@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import {
-  useUpdateCursor,
-  useGlobalStateContext,
-} from "../context/GlobalContext";
+import { useGlobalStateContext } from "../context/GlobalContext";
+import { useUpdateCursor } from "../hooks/useContextSetters";
 import AnimateWhenVisible from "../hooks/AnimateWhenVisible";
 
 const About = () => {
