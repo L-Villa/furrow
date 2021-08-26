@@ -1,4 +1,10 @@
-import React, { createContext, useReducer, useContext } from "react";
+import React, {
+  createContext,
+  useReducer,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 import { data } from "../data/data";
 
 interface IData {
@@ -123,25 +129,60 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
 export const useGlobalStateContext = () => useContext(GlobalStateContext);
 export const useGlobalDispatchContext = () => useContext(GlobalDispatchContext);
 
+// Used to initialize theme in local storage and update css variables
+export const useTheme = () => {
+  const initialTheme = useRef<string>();
+  const { currentTheme }: any = useGlobalStateContext();
+  const dispatch = useGlobalDispatchContext();
+  // Set theme from localStorage unless localStorage is empty. Defaults to dark theme
+  useEffect(() => {
+    initialTheme.current = (
+      localStorage.theme === null || undefined ? "dark" : localStorage.theme
+    )!;
+    dispatch({ type: "TOGGLE_THEME", theme: initialTheme.current });
+  }, []);
+  // Updated css variables to reflect current theme
+  useEffect(() => {
+    window.localStorage.setItem("theme", currentTheme);
+    const elem = document.documentElement.style;
+    if (currentTheme === "dark") {
+      elem.setProperty("--color-primary", "black");
+      elem.setProperty("--color-secondary", "white");
+    } else if (currentTheme === "light") {
+      elem.setProperty("--color-primary", "white");
+      elem.setProperty("--color-secondary", "black");
+    }
+  }, [currentTheme]);
+};
+
+// Used to toggle global theme
+export const useToggleTheme = () => {
+  const { currentTheme }: any = useGlobalStateContext();
+  const dispatch = useGlobalDispatchContext();
+  return () => {
+    currentTheme === "dark"
+      ? dispatch({ type: "TOGGLE_THEME", theme: "light" })
+      : dispatch({ type: "TOGGLE_THEME", theme: "dark" });
+  };
+};
+
 // Used to update cursor style
 export const useUpdateCursor = () => {
   const { cursorStyles }: any = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
-  const onCursor = (cursorType?: string): void => {
+  return (cursorType?: string): void => {
     cursorType = (cursorStyles.includes(cursorType) && cursorType) || false;
     dispatch({ type: "CURSOR_TYPE", cursorType: cursorType });
   };
-  return onCursor;
 };
 
 // Used to show or hide the navigation component
 export const useToggleMenu = () => {
   const { menuOpen }: any = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
-  const toggleMenu = (): void => {
+  return (): void => {
     dispatch({ type: "TOGGLE_NAVIGATION", menuOpen: !menuOpen });
   };
-  return toggleMenu;
 };
 
 // Interface for useLockCursor
@@ -158,7 +199,7 @@ export const useLockCursor = () => {
   const dispatch = useGlobalDispatchContext();
   const { cursorLocked }: any = useGlobalStateContext();
   const onCursor = useUpdateCursor();
-  const lockCursor = (pos: IProps["pos"], styles?: IProps["styles"]): void => {
+  return (pos: IProps["pos"], styles?: IProps["styles"]): void => {
     if (!cursorLocked) {
       dispatch({ type: "SET_CURSOR_LOCKED", cursorLocked: true });
       dispatch({ type: "SET_CURSOR_POSITION", cursorPosition: pos });
@@ -168,5 +209,4 @@ export const useLockCursor = () => {
       onCursor(styles?.exit);
     }
   };
-  return lockCursor;
 };
