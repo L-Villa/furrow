@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  useUpdateCursor,
-  useToggleMenu,
-  useGlobalStateContext,
-} from "../context/GlobalContext";
+import { useGlobalStateContext } from "../context/GlobalContext";
+import { useUpdateCursor, useToggleMenu } from "../hooks/useContextSetters";
 import AnimateWhenVisible from "../hooks/AnimateWhenVisible";
 
 const Featured = () => {

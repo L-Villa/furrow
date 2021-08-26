@@ -1,13 +1,13 @@
 import React, { useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useGlobalStateContext } from "../context/GlobalContext";
 import {
-  useGlobalStateContext,
   useToggleTheme,
   useUpdateCursor,
   useToggleMenu,
   useLockCursor,
-} from "../context/GlobalContext";
+} from "../hooks/useContextSetters";
 import useElementPosition from "../hooks/useElementPosition";
 
 const Header: React.FC = () => {

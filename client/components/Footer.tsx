@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useLockCursor } from "../context/GlobalContext";
+import { useLockCursor } from "../hooks/useContextSetters";
 import AnimateWhenVisible from "../hooks/AnimateWhenVisible";
 import useElementPosition from "../hooks/useElementPosition";
 import { Instagram, Facebook, Vimeo } from "../public/svg/social-icons";

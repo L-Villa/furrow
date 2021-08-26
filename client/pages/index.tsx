@@ -5,7 +5,7 @@ import Banner from "../components/Banner";
 import Content from "../components/Content";
 import Featured from "../components/Featured";
 import Footer from "../components/Footer";
-import { useTheme } from "../context/GlobalContext";
+import { useTheme } from "../hooks/useContextSetters";
 import styles from "../styles/Home.module.scss";
 
 const Home: NextPage = () => {

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import {
-  useGlobalStateContext,
-  useUpdateCursor,
-} from "../context/GlobalContext";
+import { useGlobalStateContext } from "../context/GlobalContext";
+import { useUpdateCursor } from "../hooks/useContextSetters";
 import Canvas from "./Canvas";
 
 const Banner: React.FC = () => {
