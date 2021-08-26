@@ -9,8 +9,8 @@ interface iState {
 
 const Cursor: React.FC = () => {
   const [mousePosition, setMousePosition] = useState<iState>({
-    x: 400,
-    y: 400,
+    x: -200,
+    y: -200,
   });
 
   const onMouseMove = (e: MouseEvent): void => {
