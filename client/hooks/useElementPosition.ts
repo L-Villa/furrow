@@ -1,5 +1,5 @@
 import { RefObject, useEffect, useState } from "react";
-import { useViewportScroll } from "framer-motion";
+import { useThrottleTrailing } from "./useThrottle";
 
 const useElementPosition = (el: RefObject<HTMLElement>, delay: number = 0) => {
   const getElement = (x: number, y: number): { x: number; y: number } => {
@@ -8,8 +8,6 @@ const useElementPosition = (el: RefObject<HTMLElement>, delay: number = 0) => {
       y: y,
     };
   };
-
-  const { scrollYProgress } = useViewportScroll();
 
   const [elementPosition, setElementPosition] = useState<any>(getElement);
 
@@ -21,23 +19,22 @@ const useElementPosition = (el: RefObject<HTMLElement>, delay: number = 0) => {
     setElementPosition(getElement(x, y));
   };
 
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handlePosition, { passive: true });
-  //   return () => {
-  //     window.removeEventListener("scroll", handlePosition);
-  //   };
-  // }, []);
+  const throttle = useThrottleTrailing(handlePosition, 300, undefined);
 
-  const [hookedYPostion, setHookedYPosition] = useState(0);
   useEffect(() => {
-    scrollYProgress.onChange((v) => setHookedYPosition(v));
-  }, [scrollYProgress]);
+    document.addEventListener("mousemove", throttle, {
+      passive: true,
+    });
+    return () => {
+      document.removeEventListener("mousemove", throttle);
+    };
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
       handlePosition();
     }, delay);
-  }, [el, hookedYPostion]);
+  }, [el]);
 
   return elementPosition;
 };
