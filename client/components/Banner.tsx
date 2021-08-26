@@ -1,68 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import useWindowDimensions from "../hooks/useWindowDimensions";
 import {
   useGlobalStateContext,
   useUpdateCursor,
 } from "../context/GlobalContext";
+import Canvas from "./Canvas";
 
 const Banner: React.FC = () => {
   const onCursor = useUpdateCursor();
-  let canvas = useRef<HTMLCanvasElement>(null);
-  const { width, height }: any = useWindowDimensions();
   const {
-    currentTheme,
     data: {
       animation: { ease },
     },
   }: any = useGlobalStateContext();
-
-  useEffect(() => {
-    let renderingElement = canvas.current;
-    let drawingElement = renderingElement?.cloneNode();
-    let renderingCtx = renderingElement?.getContext("2d");
-    //@ts-ignore
-    let drawingCtx = drawingElement?.getContext("2d");
-    let lastX: number;
-    let lastY: number;
-    let moving: boolean = false;
-
-    if (renderingCtx) {
-      renderingCtx.globalCompositeOperation = "source-over";
-      renderingCtx.fillStyle = currentTheme === "dark" ? "#000" : "#fff";
-      renderingCtx.fillRect(0, 0, width, height);
-
-      renderingElement?.addEventListener("mouseover", (e) => {
-        moving = true;
-        lastX = e.pageX - renderingElement?.offsetLeft!;
-        lastY = e.pageY - renderingElement?.offsetTop!;
-      });
-      renderingElement?.addEventListener("mouseup", (e) => {
-        moving = false;
-        lastX = e.pageX - renderingElement?.offsetLeft!;
-        lastY = e.pageY - renderingElement?.offsetTop!;
-      });
-
-      renderingElement?.addEventListener("mousemove", (e) => {
-        if (moving && renderingCtx) {
-          drawingCtx.globalCompositeOperation = "source-over";
-          renderingCtx.globalCompositeOperation = "destination-out";
-          let currentX = e.pageX - renderingElement?.offsetLeft!;
-          let currentY = e.pageY - renderingElement?.offsetTop!;
-          drawingCtx.lineJoin = "round";
-          drawingCtx.moveTo(lastX, lastY);
-          drawingCtx.lineTo(currentX, currentY);
-          drawingCtx.closePath();
-          drawingCtx.lineWidth = width * 0.06;
-          drawingCtx.stroke();
-          lastX = currentX;
-          lastY = currentY;
-          //@ts-ignore
-          renderingCtx.drawImage(drawingElement, 0, 0);
-        }
-      });
-    }
-  }, [currentTheme, width, height]);
 
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -108,7 +58,7 @@ const Banner: React.FC = () => {
           muted
         ></video>
       </div>
-      <canvas key={currentTheme} ref={canvas} width={width} height={height} />
+      <Canvas />
       <motion.h1
         className="banner-title"
         variants={bannerTitle}
