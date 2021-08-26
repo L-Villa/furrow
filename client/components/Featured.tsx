@@ -12,28 +12,15 @@ const Featured = () => {
   const onCursor = useUpdateCursor();
   const toggleMenu = useToggleMenu();
   const [hovered, setHovered] = useState(false);
-  const { menuOpen }: any = useGlobalStateContext();
+  const {
+    menuOpen,
+    data: {
+      animation: { variants, options, ease },
+    },
+  }: any = useGlobalStateContext();
+
   return (
-    <AnimateWhenVisible
-      variants={{
-        initial: {
-          opacity: 0,
-          y: 72,
-        },
-        animate: {
-          opacity: 1,
-          y: 0,
-          transition: {
-            duration: 0.6,
-            ease: [0.6, 0.05, -0.01, 0.9],
-          },
-        },
-      }}
-      options={{
-        triggerOnce: true,
-        rootMargin: "-300px",
-      }}
-    >
+    <AnimateWhenVisible variants={variants} options={options}>
       <section className="home-featured-section">
         <div className="container">
           <Link href="/projects/not-humble">
@@ -51,7 +38,7 @@ const Featured = () => {
                     animate={{ opacity: hovered ? 1 : 0 }}
                     transition={{
                       duration: 0.6,
-                      ease: [0.6, 0.05, -0.01, 0.9],
+                      ease: ease,
                     }}
                     className="meta"
                   >
@@ -66,7 +53,7 @@ const Featured = () => {
                       animate={{ x: hovered ? 48 : 0 }}
                       transition={{
                         duration: 0.6,
-                        ease: [0.6, 0.05, -0.01, 0.9],
+                        ease: ease,
                       }}
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 101 57"

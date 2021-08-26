@@ -8,41 +8,21 @@ import {
 } from "../context/GlobalContext";
 import { Facebook, Instagram, Vimeo } from "../public/svg/social-icons";
 
-const routes = [
-  {
-    id: 0,
-    title: "not humble",
-    path: "/not-humble",
-    video: "featured-video.mp4",
-  },
-  {
-    id: 1,
-    title: "bleeping easy",
-    path: "/bleeping-easy",
-    video: "easy.mp4",
-  },
-  {
-    id: 2,
-    title: "make it zero",
-    path: "/make-it-zero",
-    video: "make-it-zero.mp4",
-  },
-  {
-    id: 3,
-    title: "it takes an island",
-    path: "/it-takes-an-island",
-    video: "it-takes-an-island.mp4",
-  },
-  {
-    id: 4,
-    title: "50 beaches",
-    path: "/50-beaches",
-    video: "50-beaches.mp4",
-  },
-];
+interface IRoutes {
+  id: number;
+  title: string;
+  path: string;
+  video: string;
+}
 
 const Navigation: React.FC = () => {
-  const { menuOpen }: any = useGlobalStateContext();
+  const {
+    menuOpen,
+    data: {
+      routes,
+      animation: { ease },
+    },
+  }: any = useGlobalStateContext();
   const onCursor = useUpdateCursor();
   const toggleMenu = useToggleMenu();
   const [revealVideo, setRevealVideo] = useState({
@@ -58,7 +38,7 @@ const Navigation: React.FC = () => {
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
-            transition={{ duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
+            transition={{ duration: 0.8, ease: ease }}
             onHoverStart={() => onCursor("nav-open")}
             onHoverEnd={() => onCursor()}
           >
@@ -80,7 +60,7 @@ const Navigation: React.FC = () => {
               </div>
               <div className="nav-list">
                 <ul>
-                  {routes.map(({ id, title, path, video }) => (
+                  {routes.map(({ id, title, path, video }: IRoutes) => (
                     <motion.li
                       key={id}
                       onHoverStart={() =>
@@ -107,7 +87,7 @@ const Navigation: React.FC = () => {
                             x: -40,
                             transition: {
                               duration: 0.4,
-                              ease: [0.5, 0.05, -0.01, 0.9],
+                              ease: ease,
                             },
                           }}
                           className="link"

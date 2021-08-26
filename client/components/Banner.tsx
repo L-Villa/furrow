@@ -10,7 +10,12 @@ const Banner: React.FC = () => {
   const onCursor = useUpdateCursor();
   let canvas = useRef<HTMLCanvasElement>(null);
   const { width, height }: any = useWindowDimensions();
-  const { currentTheme }: any = useGlobalStateContext();
+  const {
+    currentTheme,
+    data: {
+      animation: { ease },
+    },
+  }: any = useGlobalStateContext();
 
   useEffect(() => {
     let renderingElement = canvas.current;
@@ -81,7 +86,7 @@ const Banner: React.FC = () => {
       y: 0,
       transition: {
         duration: 1,
-        ease: [0.6, 0.05, -0.01, 0.9],
+        ease: ease,
       },
     },
   };

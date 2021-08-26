@@ -1,31 +1,68 @@
 import React, { createContext, useReducer, useContext } from "react";
-import useElementPosition from "../hooks/useElementPosition";
+import { data } from "../data/data";
 
-interface action {
+interface IData {
+  routes: {
+    id: number;
+    title: string;
+    path: string;
+    video: string;
+  }[];
+  accordian: {
+    id: number;
+    title: string;
+    results: string[];
+  }[];
+  animation: {
+    variants: {
+      initial: {
+        opacity: number;
+        y: number;
+      };
+      animate: {
+        opacity: number;
+        y: number;
+        transition: {
+          duration: number;
+          ease: number[];
+        };
+      };
+    };
+    ease: number[];
+    options: {
+      triggerOnce: boolean;
+      rootMargin: string;
+    };
+  };
+}
+
+interface IAction {
   type: string;
   theme: string;
   cursorType: boolean;
   menuOpen: boolean;
   cursorLocked: boolean;
   cursorPosition: { x: number; y: number };
+  data: IData;
 }
-interface state {
+interface IState {
   currentTheme: string;
   cursorType: boolean;
   cursorStyles: string[];
   menuOpen: boolean;
   cursorLocked: boolean;
   cursorPosition: { x: number; y: number };
+  data: IData;
 }
-type iDispatch = React.Dispatch<any>;
+type IDispatch = React.Dispatch<any>;
 const GlobalStateContext = createContext({});
-const GlobalDispatchContext = createContext<iDispatch>({
+const GlobalDispatchContext = createContext<IDispatch>({
   // @ts-ignore
   type: "TOGGLE_THEME",
   theme: "dark",
 });
 
-const globalReducer = (state: state, action: action) => {
+const globalReducer = (state: IState, action: IAction) => {
   switch (action.type) {
     case "TOGGLE_THEME": {
       return {
@@ -71,6 +108,7 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     menuOpen: false,
     cursorLocked: false,
     cursorPosition: { x: 0, y: 0 },
+    data: data,
   });
 
   return (
@@ -107,7 +145,7 @@ export const useToggleMenu = () => {
 };
 
 // Interface for useLockCursor
-interface iProps {
+interface IProps {
   pos: { x: number; y: number };
   styles?: {
     enter?: string | undefined;
@@ -120,7 +158,7 @@ export const useLockCursor = () => {
   const dispatch = useGlobalDispatchContext();
   const { cursorLocked }: any = useGlobalStateContext();
   const onCursor = useUpdateCursor();
-  const lockCursor = (pos: iProps["pos"], styles?: iProps["styles"]): void => {
+  const lockCursor = (pos: IProps["pos"], styles?: IProps["styles"]): void => {
     if (!cursorLocked) {
       dispatch({ type: "SET_CURSOR_LOCKED", cursorLocked: true });
       dispatch({ type: "SET_CURSOR_POSITION", cursorPosition: pos });

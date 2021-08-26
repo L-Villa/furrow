@@ -3,11 +3,11 @@ import Cursor from "./Cursor";
 import Header from "./Header";
 import Navigation from "./Navigation";
 
-interface LayoutProps {
+interface IProps {
   children?: React.ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<IProps> = ({ children }) => {
   return (
     <>
       <Cursor />

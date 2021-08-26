@@ -12,7 +12,13 @@ import useElementPosition from "../hooks/useElementPosition";
 
 const Header: React.FC = () => {
   const dispatch = useGlobalDispatchContext();
-  const { currentTheme, menuOpen }: any = useGlobalStateContext();
+  const {
+    currentTheme,
+    menuOpen,
+    data: {
+      animation: { ease },
+    },
+  }: any = useGlobalStateContext();
   const onCursor = useUpdateCursor();
   const toggleMenu = useToggleMenu();
   const lockCursor = useLockCursor();
@@ -54,7 +60,7 @@ const Header: React.FC = () => {
     <motion.header
       animate={{ y: 0, opacity: 1 }}
       initial={{ y: -72, opacity: 0 }}
-      transition={{ duration: 1, ease: [0.6, 0.05, -0.01, 0.9] }}
+      transition={{ duration: 1, ease: ease }}
     >
       <div className="container">
         <div className="flex space-between no-height">
