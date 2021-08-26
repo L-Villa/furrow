@@ -32,7 +32,7 @@ const Featured = () => {
                 onHoverStart={() => setHovered(true)}
                 onHoverEnd={() => setHovered(false)}
               >
-                <div className="flex space-between">
+                <div className="flex space-between align-top">
                   <h3>Featured Project</h3>
                   <motion.div
                     animate={{ opacity: hovered ? 1 : 0 }}
