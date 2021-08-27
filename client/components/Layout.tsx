@@ -1,4 +1,5 @@
 import React from "react";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 import Cursor from "./Cursor";
 import Header from "./Header";
 import Navigation from "./Navigation";
@@ -8,9 +9,10 @@ interface IProps {
 }
 
 const Layout: React.FC<IProps> = ({ children }) => {
+  const { width }: any = useWindowDimensions();
   return (
     <>
-      <Cursor />
+      {width >= 800 && <Cursor />}
       <Header />
       <Navigation />
       {children}

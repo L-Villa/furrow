@@ -1,56 +1,85 @@
+@use "../abstracts/mixins" as *;
+
 .home-about-section {
   margin-bottom: 200px;
+  @include breakpoint(small) {
+    .flex {
+      flex-wrap: wrap;
+    }
+  }
+  @include breakpoint(xsmall) {
+    margin-bottom: 100px;
+  }
   .about {
     width: 100%;
+    margin-bottom: 1.5rem;
     h2 {
       width: 60%;
-      font-size: 2.3rem;
+      font-size: 2.2rem;
       font-weight: 400;
       margin-left: 124px;
       color: var(--color-secondary);
-      line-height: 1.3;
-      margin-bottom: 1.2rem;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+      overflow: hidden;
+      @include breakpoint(small) {
+        margin-left: 0;
+        width: 85%;
+      }
+      @include breakpoint(xsmall) {
+        font-size: 1.4rem;
+      }
     }
     p {
       max-width: 440px;
       font-size: 1.1rem;
-      line-height: 1.6rem;
+      line-height: 1.3;
       margin-left: 124px;
       color: var(--color-secondary);
-    }
-  }
-  .accordian-header {
-    width: 100%;
-    color: #ea281e;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    font-weight: 600;
-    font-size: 1.15rem;
-    margin: 8px 0;
-    .accordian-icon {
-      display: flex;
-      align-items: center;
-      height: 100%;
-      margin-right: 8px;
-      span {
-        width: 16px;
-        height: 4px;
-        background: #ea281e;
-        transition: all 0.1s ease-in-out;
+      @include breakpoint(small) {
+        margin-left: 0;
       }
     }
   }
-  .accordian-content {
-    overflow: hidden;
-    padding-left: 40px;
-    span {
+  .services {
+    h3 {
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+    .accordian-header {
       width: 100%;
-      margin: 8px 0;
-      font-size: 0.875rem;
-      color: #ea281e;
-      display: block;
-      font-weight: 300;
+      color: var(--color-accent);
+      height: 15px;
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.15rem;
+      margin: 13px 0;
+      .accordian-icon {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        margin-right: 8px;
+        span {
+          width: 16px;
+          height: 4px;
+          background: var(--color-accent);
+          transition: all 0.1s ease-in-out;
+        }
+      }
+    }
+    .accordian-content {
+      overflow: hidden;
+      padding-left: 40px;
+      span {
+        width: 100%;
+        margin: 8px 0;
+        font-size: 0.875rem;
+        color: var(--color-accent);
+        display: block;
+        font-weight: 300;
+        line-height: 0.9;
+      }
     }
   }
 }

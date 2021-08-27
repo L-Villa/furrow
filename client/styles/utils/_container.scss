@@ -7,16 +7,16 @@
   position: relative;
   width: auto;
   height: 100%;
-  @include breakpoint(small) {
+  @include breakpoint-down(small) {
     max-width: 960px;
   }
-  @include breakpoint(medium) {
+  @include breakpoint-down(medium) {
     max-width: 1152px;
   }
-  @include breakpoint(large) {
+  @include breakpoint-down(large) {
     max-width: 1244px;
   }
-  .fluid {
+  &.fluid {
     padding: 0;
     margin: 0;
     max-width: 100%;
@@ -39,5 +39,8 @@
   }
   &.no-height {
     height: 0;
+  }
+  &.wrap {
+    flex-wrap: wrap;
   }
 }

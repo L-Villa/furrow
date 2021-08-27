@@ -31,12 +31,12 @@ const Footer = () => {
         <div className="container">
           <div className="flex space-between">
             <div className="footer-content">
-              <p>123.555.4321</p>
+              <p>+1.709.555.4935</p>
               <p>info@contact.com</p>
             </div>
             <div className="footer-content wider">
-              <p>15 Main St</p>
-              <p>City, State 99999</p>
+              <p>15 Standard St</p>
+              <p>City, State 04954</p>
             </div>
             <div className="footer-social">
               <a

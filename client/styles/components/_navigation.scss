@@ -1,3 +1,5 @@
+@use "../abstracts/mixins" as *;
+
 nav {
   position: fixed;
   top: 0;
@@ -5,7 +7,7 @@ nav {
   width: 100%;
   height: 100%;
   display: block;
-  background: #ea281e;
+  background: var(--color-accent);
   color: #000;
   z-index: 100;
   overflow: hidden;
@@ -39,6 +41,12 @@ nav {
     align-items: center;
     ul {
       padding: 0;
+      @include breakpoint(small) {
+        margin-bottom: 16rem;
+      }
+      @include breakpoint(xsmall) {
+        margin-bottom: 7rem;
+      }
       li {
         list-style: none;
         font-size: 3rem;
@@ -47,6 +55,12 @@ nav {
         height: 96px;
         line-height: 96px;
         overflow: hidden;
+        @include breakpoint(xsmall) {
+          line-height: 1;
+          font-size: 1.5rem;
+          white-space: nowrap;
+          height: 3rem;
+        }
         .link {
           color: var(--color-primary);
           position: relative;
@@ -72,12 +86,24 @@ nav {
     left: 0;
     width: 100%;
     padding: 56px 0px;
+    @include breakpoint(small) {
+      margin-top: 0px;
+      padding: 10px 0;
+      .flex {
+        flex-direction: column;
+        justify-content: flex-start !important;
+        align-items: flex-start;
+      }
+    }
     .footer-content {
-      color: #ea281e;
+      color: var(--color-accent);
       font-size: 22px;
       font-weight: 600;
       line-height: 8px;
       flex: 1;
+      @include breakpoint(xsmall) {
+        font-size: 1.2rem;
+      }
       p {
         line-height: 1.5;
         color: var(--color-primary);
@@ -95,6 +121,9 @@ nav {
         width: 30px;
         height: 30px;
         margin: 15px;
+        @include breakpoint(small) {
+          margin-left: 0;
+        }
         svg {
           width: 100%;
           height: 100%;
@@ -117,7 +146,7 @@ nav {
     background: #000;
     .reveal {
       width: 100%;
-      background: #ea281e;
+      background: var(--color-accent);
       position: absolute;
       top: 0;
       bottom: 0;

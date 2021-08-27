@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useGlobalStateContext } from "../context/GlobalContext";
 import { useUpdateCursor } from "../hooks/useContextSetters";
 import Canvas from "./Canvas";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const Banner: React.FC = () => {
   const onCursor = useUpdateCursor();
@@ -11,6 +12,7 @@ const Banner: React.FC = () => {
       animation: { ease },
     },
   }: any = useGlobalStateContext();
+  const { width }: any = useWindowDimensions();
 
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -56,7 +58,7 @@ const Banner: React.FC = () => {
           muted
         ></video>
       </div>
-      <Canvas />
+      {width >= 800 && <Canvas />}
       <motion.h1
         className="banner-title"
         variants={bannerTitle}

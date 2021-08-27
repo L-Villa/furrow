@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useGlobalStateContext } from "../context/GlobalContext";
 import { useToggleMenu, useUpdateCursor } from "../hooks/useContextSetters";
 import { Facebook, Instagram, Vimeo } from "../public/svg/social-icons";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 interface IRoutes {
   id: number;
@@ -13,6 +14,7 @@ interface IRoutes {
 }
 
 const Navigation: React.FC = () => {
+  const { width }: any = useWindowDimensions();
   const {
     menuOpen,
     data: {
@@ -149,30 +151,32 @@ const Navigation: React.FC = () => {
                 </div>
               </footer>
             </div>
-            <div className="nav-videos">
-              <motion.div
-                animate={{ width: revealVideo.show ? 0 : "100%" }}
-                className="reveal"
-              ></motion.div>
-              <div className="video">
-                <AnimatePresence exitBeforeEnter>
-                  <motion.video
-                    key={revealVideo.key}
-                    src={`/video/${revealVideo.video}`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 1 }}
-                    transition={{
-                      duration: 0.2,
-                      ease: "easeInOut",
-                    }}
-                    loop
-                    autoPlay
-                    muted
-                  ></motion.video>
-                </AnimatePresence>
+            {width >= 1024 && (
+              <div className="nav-videos">
+                <motion.div
+                  animate={{ width: revealVideo.show ? 0 : "100%" }}
+                  className="reveal"
+                ></motion.div>
+                <div className="video">
+                  <AnimatePresence exitBeforeEnter>
+                    <motion.video
+                      key={revealVideo.key}
+                      src={`/video/${revealVideo.video}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 1 }}
+                      transition={{
+                        duration: 0.2,
+                        ease: "easeInOut",
+                      }}
+                      loop
+                      autoPlay
+                      muted
+                    ></motion.video>
+                  </AnimatePresence>
+                </div>
               </div>
-            </div>
+            )}
           </motion.nav>
         )}
       </AnimatePresence>

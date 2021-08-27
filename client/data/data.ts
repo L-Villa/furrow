@@ -104,7 +104,7 @@ export const data = {
     ease: [0.6, 0.05, -0.01, 0.9],
     options: {
       triggerOnce: true,
-      rootMargin: "-300px",
+      rootMargin: "-100px",
     },
   },
 };
