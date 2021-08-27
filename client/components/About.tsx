@@ -71,7 +71,7 @@ const Accordian: React.FC<IProps> = ({ details, expanded, setExpanded }) => {
 
   useEffect(() => {
     setIsOpen(details.id === expanded);
-  }, [expanded]);
+  }, [details.id, expanded]);
 
   return (
     <>

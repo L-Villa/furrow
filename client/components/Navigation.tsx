@@ -140,30 +140,36 @@ const Navigation: React.FC = () => {
                       <p>City, State 99999</p>
                     </div>
                     <div className="footer-social">
-                      <a
-                        href="/"
-                        target="_blank"
-                        onMouseEnter={() => onCursor("pointer")}
-                        onMouseLeave={() => onCursor("nav-open")}
-                      >
-                        <Instagram />
-                      </a>
-                      <a
-                        href="/"
-                        target="_blank"
-                        onMouseEnter={() => onCursor("pointer")}
-                        onMouseLeave={() => onCursor("nav-open")}
-                      >
-                        <Facebook />
-                      </a>
-                      <a
-                        href="/"
-                        target="_blank"
-                        onMouseEnter={() => onCursor("pointer")}
-                        onMouseLeave={() => onCursor("nav-open")}
-                      >
-                        <Vimeo />
-                      </a>
+                      <Link href="/">
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onMouseEnter={() => onCursor("pointer")}
+                          onMouseLeave={() => onCursor("nav-open")}
+                        >
+                          <Instagram />
+                        </a>
+                      </Link>
+                      <Link href="/">
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onMouseEnter={() => onCursor("pointer")}
+                          onMouseLeave={() => onCursor("nav-open")}
+                        >
+                          <Facebook />
+                        </a>
+                      </Link>
+                      <Link href="/">
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onMouseEnter={() => onCursor("pointer")}
+                          onMouseLeave={() => onCursor("nav-open")}
+                        >
+                          <Vimeo />
+                        </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

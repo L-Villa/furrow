@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import Link from "next/link";
 import { useLockCursor } from "../hooks/useContextSetters";
 import AnimateWhenVisible from "../hooks/AnimateWhenVisible";
 import useElementPosition from "../hooks/useElementPosition";
@@ -39,39 +40,45 @@ const Footer = () => {
               <p>City, State 04954</p>
             </div>
             <div className="footer-social">
-              <a
-                ref={instagramRef}
-                href="/"
-                target="_blank"
-                onMouseEnter={() =>
-                  lockCursor(instagramPosition, { enter: "hovered" })
-                }
-                onMouseLeave={() => lockCursor(instagramPosition)}
-              >
-                <Instagram />
-              </a>
-              <a
-                ref={facebookRef}
-                href="/"
-                target="_blank"
-                onMouseEnter={() =>
-                  lockCursor(facebookPosition, { enter: "hovered" })
-                }
-                onMouseLeave={() => lockCursor(facebookPosition)}
-              >
-                <Facebook />
-              </a>
-              <a
-                ref={vimeoRef}
-                href="/"
-                target="_blank"
-                onMouseEnter={() =>
-                  lockCursor(vimeoPosition, { enter: "hovered" })
-                }
-                onMouseLeave={() => lockCursor(vimeoPosition)}
-              >
-                <Vimeo />
-              </a>
+              <Link href="/">
+                <a
+                  ref={instagramRef}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={() =>
+                    lockCursor(instagramPosition, { enter: "hovered" })
+                  }
+                  onMouseLeave={() => lockCursor(instagramPosition)}
+                >
+                  <Instagram />
+                </a>
+              </Link>
+              <Link href="/">
+                <a
+                  ref={facebookRef}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={() =>
+                    lockCursor(facebookPosition, { enter: "hovered" })
+                  }
+                  onMouseLeave={() => lockCursor(facebookPosition)}
+                >
+                  <Facebook />
+                </a>
+              </Link>
+              <Link href="/">
+                <a
+                  ref={vimeoRef}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={() =>
+                    lockCursor(vimeoPosition, { enter: "hovered" })
+                  }
+                  onMouseLeave={() => lockCursor(vimeoPosition)}
+                >
+                  <Vimeo />
+                </a>
+              </Link>
             </div>
           </div>
         </div>
