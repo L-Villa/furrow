@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useGlobalStateContext } from "../context/GlobalContext";
@@ -29,6 +29,24 @@ const Navigation: React.FC = () => {
     video: "featured-video.mp4",
     key: 0,
   });
+  const disableScroll = () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollLeft =
+      window.pageXOffset || document.documentElement.scrollLeft;
+    window.onscroll = () => {
+      window.scrollTo(scrollLeft, scrollTop);
+    };
+  };
+  const enableScroll = () => {
+    window.onscroll = () => {};
+  };
+  useEffect(() => {
+    if (menuOpen) {
+      disableScroll();
+    } else {
+      enableScroll();
+    }
+  }, [menuOpen]);
   return (
     <>
       <AnimatePresence>
