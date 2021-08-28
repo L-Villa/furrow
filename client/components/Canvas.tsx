@@ -19,7 +19,7 @@ const Canvas = () => {
 
     if (renderingCtx) {
       renderingCtx.globalCompositeOperation = "source-over";
-      renderingCtx.fillStyle = currentTheme === "dark" ? "#000" : "#fff";
+      renderingCtx.fillStyle = currentTheme === "light" ? "#ffffff" : "#000000";
       renderingCtx.fillRect(0, 0, width, height);
 
       renderingElement?.addEventListener("mouseover", (e) => {
