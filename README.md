@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Furrow
 
-## Getting Started
+Furrow is a studio that focuses on video production and post production. This project is a clone of their current homepage, with some improved performance, in order to sharpen my web development skills. During this project I learned how to implement NextJS in combination with typescript's static typing. This project has a [demo](https://luisvilla.xyz/projects/nike/demo) on my personal website.
 
-First, run the development server:
+Visit my [personal website](https://luisvilla.xyz) if you'd like to see more of my projects.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Site
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Landing Page
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+A website designed with both mobile and desktop views in minds. Enjoy snappy load times with minimal animation for smaller mobile screens and impressive interactions on larger desktop screens. Erase away the canvas to reveal the content in the site's landing section or toggle the website's theme between light and dark mode to match your current mood.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+![Home Page Screenshot](./client/public/desktop.jpg)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Setup
 
-## Learn More
+- This project requires [NodeJS](https://nodejs.org/en/).
+- Clone the repository and run `npm i` or `npm install` to download all required modules.
+- Once downloaded, run `npm run dev`.
+- The project should open at [http://localhost:3000](http://localhost:3000).
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Frontend
+  - next - version 11.1.0,
+  - react - version 17.0.2,
+  - typescript - version 4.3.5
+  - framer-motion - version 4.1.17,
+  - sass - version 1.37.5
