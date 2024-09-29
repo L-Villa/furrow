@@ -1,8 +1,8 @@
 # Furrow
 
-Furrow is a studio that focuses on video production and post production. This project is a clone of their current homepage, with some improved performance, in order to sharpen my web development skills. During this project I learned how to implement NextJS in combination with typescript's static typing. This project has a [demo](https://luisvilla.xyz/projects/furrow/demo) on my personal website.
+Furrow is a studio that focuses on video production and post production. This project is a clone of their current homepage, with some improved performance, in order to sharpen my web development skills. During this project I learned how to implement NextJS in combination with typescript's static typing. This project has a [demo](https://furrow.luis-villa.com) on my personal website.
 
-Visit my [personal website](https://luisvilla.xyz) if you'd like to see more of my projects.
+Visit my [personal website](https://luis-villa.com) if you'd like to see more of my projects.
 
 ## Site
 
